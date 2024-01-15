@@ -12,7 +12,8 @@ az ad app federated-credential create \
 az ad sp create --id $applicationRegistrationObjectId
 az role assignment create \
     --assignee $applicationRegistrationAppId \
-    --role Contributor
+    --role Contributor \
+    --scope "subscriptions/$(az account show --query id --output tsv)"
 
 echo "AZURE_CLIENT_ID: $applicationRegistrationAppId"
 echo "AZURE_TENANT_ID: $(az account show --query tenantId --output tsv)"
